@@ -1,4 +1,7 @@
+
+
 const SingleItem = ({ item }) => {
+  
   return (
     <div className='single-item'>
       <input

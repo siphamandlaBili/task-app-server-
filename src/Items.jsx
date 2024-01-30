@@ -1,6 +1,21 @@
+import custAxios from '../axios/customInstance';
 import SingleItem from './SingleItem';
+import {useQuery} from "@tanstack/react-query";
+
+
 const Items = ({ items }) => {
-  // console.log(items)
+  const {data,isLoading} = useQuery({
+    queryKey: ["tasklist"],
+    queryFn: ()=> custAxios.get("/"),
+  })
+
+  // console.log(data, isLoading);
+
+  if(isLoading){
+    return <p>🔃 Loading ...</p>
+  }
+
+
   return (
     <div className='items'>
       {items?.map((item) => {
