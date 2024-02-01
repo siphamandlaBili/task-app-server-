@@ -1,14 +1,18 @@
 import { useState } from 'react';
-
 import axios from 'axios';
 import custAxios from '../axios/customInstance';
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 
 const Form = () => {
   const [newItemName, setNewItemName] = useState('');
+const {mutate:addTask,isLoading} = useMutation({
+  mutationFn: (task)=> custAxios.post("/",{title: task}),
+})
+console.log(addTask)
   const handleSubmit = (e) => {
     e.preventDefault();
-    custAxios.post("/",{title:newItemName})
+    addTask(newItemName);
+    // custAxios.post("/",{title:newItemName})
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -20,7 +24,7 @@ const Form = () => {
           value={newItemName}
           onChange={(event) => setNewItemName(event.target.value)}
         />
-        <button type='submit' className='btn'>
+        <button type='submit' className='btn' disabled={isLoading}>
           add task
         </button>
       </div>
