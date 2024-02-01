@@ -6,7 +6,7 @@ import {useQuery} from "@tanstack/react-query";
 const Items = () => {
   const {data,isLoading,error,isError} = useQuery({
     queryKey: ["tasklist"],
-    queryFn: ()=> custAxios.get("/bili"),
+    queryFn: ()=> custAxios.get("/"),
   })
 
   console.log(error);

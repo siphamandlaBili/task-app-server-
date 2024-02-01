@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
+import axios from 'axios';
+import custAxios from '../axios/customInstance';
+import {useQuery} from "@tanstack/react-query";
+
 const Form = () => {
   const [newItemName, setNewItemName] = useState('');
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    custAxios.post("/",{title:newItemName})
   };
   return (
     <form onSubmit={handleSubmit}>
